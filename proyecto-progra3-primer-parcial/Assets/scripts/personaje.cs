@@ -13,6 +13,7 @@ public class personaje : MonoBehaviour
     public int NSaltos;
     public int Saltos;
     public AudioSource Salta;
+    public AudioSource bgm;
 
     public Camera cam;
     // Start is called before the first frame update
@@ -28,7 +29,7 @@ public class personaje : MonoBehaviour
     void Update()
     {
         if (transform.position.y < -10 || Input.GetKeyDown(KeyCode.U)) {
-            rigi.MovePosition(new Vector3(3, -5, transform.position.z));
+            rigi.MovePosition(new Vector3(-5, -5, 90));
             rigi.MoveRotation(Quaternion.Euler(Vector3.zero));
         }
 
@@ -76,5 +77,12 @@ public class personaje : MonoBehaviour
         }
 
         rigi.velocity = vel;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.CompareTag("stopMusic")) {
+            bgm.Stop();
+        }
     }
 }

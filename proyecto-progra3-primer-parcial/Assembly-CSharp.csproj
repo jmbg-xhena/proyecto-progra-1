@@ -67,6 +67,7 @@
     <Compile Include="Assets\scripts\detectorsuelo.cs" />
     <Compile Include="Assets\scripts\doorOpener.cs" />
     <Compile Include="Assets\scripts\personaje.cs" />
+    <Compile Include="Assets\scripts\plataforma.cs" />
     <Compile Include="Assets\scripts\teletransportar.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/PAVILION/Documents/GitHub/proyecto-progra-1/proyecto-progra3-primer-parcial/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

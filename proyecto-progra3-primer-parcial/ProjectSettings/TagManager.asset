@@ -7,6 +7,8 @@ TagManager:
   - colorcube
   - pushcube
   - sueloCirculos
+  - esferasText
+  - stopMusic
   layers:
   - Default
   - TransparentFX

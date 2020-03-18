@@ -12,6 +12,7 @@ public class camara : MonoBehaviour
     public Light colorLight;
     public LayerMask mascaraPersonalizada;
     public GameObject circulo;
+    public GameObject sueloTextura;
 
     private bool disparado = false;
     // Start is called before the first frame update
@@ -59,8 +60,14 @@ public class camara : MonoBehaviour
                 }
                 if (hit.transform.CompareTag("sueloCirculos"))
                 {
-                    print("touch");
-                    Instantiate(circulo,hit.transform);
+                    Instantiate(circulo, hit.point, Quaternion.Euler(0, 0, 0));
+                }
+                if (hit.transform.CompareTag("esferasText"))
+                {
+                    sueloTextura.GetComponent<Renderer>().material.SetTexture("_MainTex", hit.transform.GetComponent<Renderer>().material.GetTexture("_MainTex"));
+                    sueloTextura.GetComponent<Renderer>().material.SetTexture("_BumpMap", hit.transform.GetComponent<Renderer>().material.GetTexture("_BumpMap"));
+                    sueloTextura.GetComponent<Renderer>().material.SetFloat("_BumpScale", 1f);
+                    sueloTextura.GetComponent<Renderer>().material.mainTextureScale = new Vector2(2, 2);
                 }
 
             }
