@@ -131,7 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 78112340}
   - component: {fileID: 78112341}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2127,7 +2127,7 @@ GameObject:
   - component: {fileID: 1210486610}
   - component: {fileID: 1210486609}
   - component: {fileID: 1210486612}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: arma
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2497,7 +2497,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1410037121}
   - component: {fileID: 1410037124}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: arma camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
