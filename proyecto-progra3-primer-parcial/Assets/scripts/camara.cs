@@ -5,29 +5,33 @@ using UnityEngine;
 public class camara : MonoBehaviour
 {
     private Camera cam;
-    public AudioSource dispara;
 
+    public AudioSource dispara;
     public Light armaLight;
     public int IntencidadMax_luz;
+    public float velocidadLuz;
+
     public Light colorLight;
+
     public LayerMask mascaraPersonalizada;
-    public GameObject circulo;
     public GameObject sueloTextura;
 
+    public GameObject circulo;
+
     private bool disparado = false;
-    // Start is called before the first frame update
+
     void Start()
     {
         cam = gameObject.GetComponent<Camera>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //activa la luz del arma cada vez que se dispara
         if (disparado == true) {
             if (armaLight.intensity < IntencidadMax_luz)
             {
-                armaLight.intensity += 0.15f;
+                armaLight.intensity += velocidadLuz;
             }
             else {
                 disparado = false;
@@ -36,10 +40,11 @@ public class camara : MonoBehaviour
         else
         {
             if (armaLight.intensity > 0) {
-                armaLight.intensity -= 0.15f;
+                armaLight.intensity -= velocidadLuz;
             }
         }
 
+        //disparo
         if (Input.GetMouseButtonDown(0))
         {
             disparado = true;
@@ -50,18 +55,21 @@ public class camara : MonoBehaviour
             //if (Physics.Raycast(rayo, out hit, mascara))
             if (Physics.Raycast(rayo, out hit,mascaraPersonalizada))
             {
-                Debug.DrawLine(rayo.origin, hit.point, Color.green, 1f);
+                //cambia el color de la luz del segundo cuarto
                 if (hit.transform.CompareTag("colorcube")) {
                     colorLight.color = hit.transform.GetComponent<Renderer>().material.color;
                 }
+                //empujar cubos en el curato cuarto
                 if (hit.transform.CompareTag("pushcube"))
                 {
-                    hit.transform.GetComponent<Rigidbody>().velocity = hit.normal*-10;
+                    hit.transform.GetComponent<Rigidbody>().velocity = hit.normal*-30;
                 }
+                //crear esferas en el sexto cuarto
                 if (hit.transform.CompareTag("sueloCirculos"))
                 {
-                    Instantiate(circulo, hit.point, Quaternion.Euler(0, 0, 0));
+                    Instantiate(circulo, new Vector3(hit.point.x, hit.point.y+0.5f, hit.point.z), Quaternion.Euler(0, 0, 0));
                 }
+                //cambiar de texturas el suelo del septimo cuarto
                 if (hit.transform.CompareTag("esferasText"))
                 {
                     sueloTextura.GetComponent<Renderer>().material.SetTexture("_MainTex", hit.transform.GetComponent<Renderer>().material.GetTexture("_MainTex"));
@@ -70,10 +78,6 @@ public class camara : MonoBehaviour
                     sueloTextura.GetComponent<Renderer>().material.mainTextureScale = new Vector2(2, 2);
                 }
 
-            }
-            else
-            {
-                Debug.DrawLine(rayo.origin, rayo.direction * 100, Color.red, 1f);
             }
         }
     }

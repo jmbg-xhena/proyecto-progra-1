@@ -16,7 +16,7 @@ public class personaje : MonoBehaviour
     public AudioSource bgm;
 
     public Camera cam;
-    // Start is called before the first frame update
+
     void Start()
     {
         cam = gameObject.GetComponentInChildren<Camera>();
@@ -25,24 +25,23 @@ public class personaje : MonoBehaviour
         correr = 1;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //regresar al inicio del cuarto si el jugador cae al vacío
         if (transform.position.y < -10 || Input.GetKeyDown(KeyCode.U)) {
             rigi.MovePosition(new Vector3(-5, -5, 90));
             rigi.MoveRotation(Quaternion.Euler(Vector3.zero));
         }
 
+        //controlador del jugador
 
-        float h = Input.GetAxis("Horizontal");//[-1.0f,1.0f]
-        float v = Input.GetAxis("Vertical");//[-1.0f,1.0f]
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
 
         Vector3 vel = rigi.velocity;
         Vector3 mov = new Vector3(h, 0f, v);
         mov = transform.TransformDirection(mov) * velocidad * correr;
         vel = new Vector3(mov.x, vel.y, mov.z);
-        //vel.x = h * velocidad;
-        //vel.z = v * velocidad;
 
         if (EnSuelo && Input.GetButtonDown("Jump"))
         {
@@ -72,13 +71,14 @@ public class personaje : MonoBehaviour
         {
             Quaternion rotactual = rigi.rotation;
             Quaternion rotacionasumar = Quaternion.Euler(Vector3.up * velRotación * Time.deltaTime);
-            rotactual *= rotacionasumar;//mult de quaterniones es una suma
+            rotactual *= rotacionasumar;
             rigi.MoveRotation(rotactual);
         }
 
         rigi.velocity = vel;
     }
 
+    //detener l musica cuando se entra al ultimo cuarto
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.CompareTag("stopMusic")) {

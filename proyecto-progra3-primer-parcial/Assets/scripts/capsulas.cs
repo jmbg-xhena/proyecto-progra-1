@@ -4,21 +4,11 @@ using UnityEngine;
 
 public class capsulas : MonoBehaviour
 {
-    // Start is called before the first frame update
     public LayerMask mascara;
     public LayerMask mascara_reset;
     public Camera cam;
-    void Start()
-    {
-        
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //cambiar la mascaras visibles para la cámara principal cuando se para sobre uno de los pads
     private void OnCollisionEnter(Collision collision)
     {
         cam.cullingMask = mascara;

@@ -8,6 +8,6 @@ public class detectorsuelo : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         pers.EnSuelo = true;//avisamos que está en el suelo
-        pers.Saltos = pers.NSaltos;
+        pers.Saltos = pers.NSaltos;//resetear saltos
     }
 }

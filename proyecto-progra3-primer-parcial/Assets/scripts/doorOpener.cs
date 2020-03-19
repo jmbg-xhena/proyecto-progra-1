@@ -7,15 +7,10 @@ public class doorOpener : MonoBehaviour
     public GameObject door;
     private bool open = false;
     public float openSpeed = 0.2F;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
+        //mueve la puerta hasta el máximo o el minimo dependiendo de si el jugador está o no en el trigger
         if (open)
         {
             if (door.transform.position.y < 11.5)
@@ -33,6 +28,7 @@ public class doorOpener : MonoBehaviour
 
     }
 
+    //abrir
     void OnTriggerEnter(Collider other)
     {
         if (other.transform.CompareTag("Player")){
@@ -40,6 +36,7 @@ public class doorOpener : MonoBehaviour
         }
     }
 
+    //cerrar
     private void OnTriggerExit(Collider other)
     {
         if (other.transform.CompareTag("Player"))
